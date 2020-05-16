@@ -1,5 +1,5 @@
 class Distribuidor(object):
-    def __init__(self, *args):
+    def __init__(self, *args) -> None:
         """id , nome, cnpj, contato, nivel, nome_pai, pecas_vendidas"""
 
         self._dist_id: int = args[0]
@@ -10,23 +10,23 @@ class Distribuidor(object):
         self._nome_pai: str = args[5]
         self._pecas_vendidas: float = args[6]
 
-    def get_dist_id(self):
+    def get_dist_id(self) -> int:
         return self._dist_id
 
-    def get_dist_nome(self):
+    def get_dist_nome(self) -> str:
         return self._dist_nome
 
-    def get_cnpj(self):
+    def get_cnpj(self) -> int:
         return self._cnpj
 
-    def get_contato(self):
+    def get_contato(self) -> str:
         return self._contato
 
-    def get_nivel(self):
+    def get_nivel(self) -> str:
         return self._nivel
 
-    def get_nome_pai(self):
+    def get_nome_pai(self) -> str:
         return self._nome_pai
 
-    def get_pecas_vendidas(self):
+    def get_pecas_vendidas(self) -> float:
         return self._pecas_vendidas
