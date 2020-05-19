@@ -15,7 +15,7 @@ def puxar_dados() -> Tuple[List[Vendas], List[Distribuidor]]:
     lista_de_vendas = load_data_list(vendas_save_file_path)
     lista_de_dist = load_data_list(dist_save_file_path)
 
-    return tuple([lista_de_vendas, lista_de_dist])
+    return lista_de_vendas, lista_de_dist
 
 
 def load_data_list(load_path: str) -> List:
