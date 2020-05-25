@@ -1,23 +1,21 @@
-from typing import Union, Optional, List
+
 from tratar_dados.puxar_dados import puxar_dados
-from tratar_dados.serializar import serializar_dados
+from tratar_dados.atualizar_dados import atualizar_dados
 from estrutura_dados.distrbuidor import Distribuidor
 from tratar_dados.erro_tratamento import ErroTratamento
 
-
-def tratamento_registro_cadastro(*args: tuple) -> Union[Optional, str]:
-    """id , nome, cnpj, contato, nivel, nome_pai, pecas_vendidas"""
+def tratamento_registro_cadastro(*args):
+    """nome, cnpj, contato, nivel, nome_pai, pecas_vendidas"""
 
     dados_vendas, dados_dist = puxar_dados()
 
-    result = verificar_conteudo_dos_dados(args)
+    result = verificar_conteudo_dos_dados(dados_dist, *args)
 
-    if type(result) == str:
-        return result
+    if type(result) == ErroTratamento:
+        return result.get_msg()
     if type(result) == Distribuidor:
         dados_dist.append(result)
-
-    serializar_dados(dados_vendas, dados_dist)
+        atualizar_dados(dados_vendas, dados_dist)
 
     return 'Sucesso'
 
@@ -25,43 +23,35 @@ def tratamento_registro_cadastro(*args: tuple) -> Union[Optional, str]:
 def verificar_conteudo_dos_dados(
     dados_dist: list,
     *args: tuple,
-) -> Union[str, Distribuidor]:
 
+):
     try:
-        tratar_id(args[0], dados_dist)
-    except Exception as e:
+        tratar_nome(args[0])
+    except ErroTratamento as e:
         return e
 
     try:
-        tratar_nome(args[1])
-    except Exception as e:
+        tratar_cnpj(args[1])
+    except ErroTratamento as e:
         return e
 
     try:
-        tratar_cnpj(args[2])
-    except Exception as e:
+        tratar_nivel(args[3])
+    except ErroTratamento as e:
         return e
 
     try:
-        args[4] = args[4].upper()
-        tratar_nivel(args[4])
-    except Exception as e:
+        tratar_nome_pai(args[4], dados_dist)
+    except ErroTratamento as e:
         return e
 
     try:
-        tratar_nome_pai(args[5], dados_dist)
-    except Exception as e:
+        tratar_float(args[5])
+    except ErroTratamento as e:
         return e
 
-    try:
-        tratar_float(args[6])
-    except Exception as e:
-        return e
-
-    return Distribuidor(args)
-
-
-def tratar_id(dist_id, dados_dist: List[Distribuidor]) -> None:
+   
+def tratar_id(dist_id, dados_dist) -> None:
 
     try:
         dist_id = int(dist_id)
@@ -96,24 +86,24 @@ def tratar_cnpj(cnpj: str):
         cnpj = int(cnpj)
     except Exception:
         raise ErroTratamento(
-            'Não foi possivel tratar o cnpj. Digitou Corretamente?'
+            'CNPJ digitado incorretamente.'
         )
 
     algorismos = list(cnpj_str)
     if len(algorismos) > 14:
         raise ErroTratamento(
-            'Não foi possivel tratar o cnpj. Digitou Corretamente?'
+            'CNPJ digitado incorretamente.'
         )
     sobra = cpf_iter(algorismos, 11)
 
     if sobra < 2:
         if not int(algorismos[12]) == 0:
             raise ErroTratamento(
-                'Não foi possivel tratar o cnpj. Digitou Corretamente?'
+                'CNPJ digitado incorretamente.'
             )
     if not int(algorismos[12]) == 11 - sobra:
         raise ErroTratamento(
-            'Não foi possivel tratar o cnpj. Digitou Corretamente?'
+            'CNPJ digitado incorretamente.'
         )
 
     sobra = cpf_iter(algorismos, 13)
@@ -121,11 +111,11 @@ def tratar_cnpj(cnpj: str):
     if sobra < 2:
         if not int(algorismos[13]) == 0:
             raise ErroTratamento(
-                'Não foi possivel tratar o cnpj. Digitou Corretamente?'
+                'CNPJ digitado incorretamente.'
             )
     if not int(algorismos[13]) == 11 - sobra:
         raise ErroTratamento(
-            'Não foi possivel tratar o cnpj. Digitou Corretamente?'
+            'CNPJ digitado incorretamente.'
         )
 
 
