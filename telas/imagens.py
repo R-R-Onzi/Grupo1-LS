@@ -8,9 +8,8 @@ def front():
     root.geometry("550x500")
     root.title('Pleno Sono ')
 
-    #logo = ImageTk.PhotoImage(Image.open('cropped-plenosono_logo-1.png'))
-    #lg = Label(image = logo)
-
+    logo = ImageTk.PhotoImage(Image.open('plenosono.png'))
+    lg = Label(image=logo)
 
     def cad():
 
@@ -34,7 +33,7 @@ def front():
         mens1 = Label(cadastro, text = "Nome Real", font = 25, padx = 50, pady = 25)
         mens2 = Label(cadastro, text = "CNPJ", font = 25, padx = 50, pady = 25)
         mens3 = Label(cadastro, text = "Contato", font = 25, padx = 50, pady = 25)
-        mens4 = Label(cadastro, text = "Niível de Formação", font = 50, padx = 25, pady = 25)
+        mens4 = Label(cadastro, text = "Nível de Formação", font = 50, padx = 25, pady = 25)
         mens5 = Label(cadastro, text = "Nome do Pai", font = 25, padx = 50, pady = 25)
         mens6 = Label(cadastro, text = "Peças vendidas", font = 25, padx = 50, pady = 25)
 
@@ -86,7 +85,7 @@ def front():
     Cadas_Dist.grid(row = 0, column = 0, padx = 50, pady = 50)
     Alt_Dist.grid(row = 0, column = 1, padx = 50, pady = 50)
 
-    #lg.grid(row = 1, column = 0, columnspan = 2)
+    lg.grid(row = 1, column = 0, columnspan = 2)
 
     Ger_Rel.grid(row = 2, column = 0, padx = 50, pady = 50)
     Vis_Dist.grid(row = 2, column = 1, padx = 50, pady = 50)
