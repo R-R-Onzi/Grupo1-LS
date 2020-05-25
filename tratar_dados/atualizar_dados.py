@@ -11,7 +11,6 @@ def atualizar_dados(
 ) -> Tuple[List[Vendas], List[Distribuidor]]:
 
     serializar(dados_vendas, dados_dist)
-
     dados_atualizados = puxar_dados()
 
     return dados_atualizados

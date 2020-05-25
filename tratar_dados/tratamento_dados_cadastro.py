@@ -1,8 +1,8 @@
+
 from tratar_dados.puxar_dados import puxar_dados
 from tratar_dados.atualizar_dados import atualizar_dados
 from estrutura_dados.distrbuidor import Distribuidor
 from tratar_dados.erro_tratamento import ErroTratamento
-
 
 def tratamento_registro_cadastro(*args):
     """nome, cnpj, contato, nivel, nome_pai, pecas_vendidas"""
@@ -23,6 +23,7 @@ def tratamento_registro_cadastro(*args):
 def verificar_conteudo_dos_dados(
     dados_dist: list,
     *args: tuple,
+
 ):
     try:
         tratar_nome(args[0])
@@ -49,9 +50,7 @@ def verificar_conteudo_dos_dados(
     except ErroTratamento as e:
         return e
 
-    return Distribuidor(args)
-
-
+   
 def tratar_id(dist_id, dados_dist) -> None:
 
     try:
