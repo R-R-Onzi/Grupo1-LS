@@ -16,10 +16,6 @@ class Excellent():
         self._total      = linha_pagar.values[0][-1]  # -1 traz o ultimo elemento da lista       
 
 
-
-# print(df.columns)
-
-
 pedido = Excellent('pedido.xlsx')
 
 print(pedido._numpedido)
