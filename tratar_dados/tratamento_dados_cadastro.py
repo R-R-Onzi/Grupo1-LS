@@ -17,14 +17,14 @@ def tratamento_registro_cadastro(*args):
         dados_dist.append(result)
         atualizar_dados(dados_vendas, dados_dist)
 
-    return 'Sucesso'
+    return 1
 
 
 def verificar_conteudo_dos_dados(
     dados_dist: list,
     *args: tuple,
 ):
-    print(args[0])
+
     try:
         tratar_nome(args[0])
     except ErroTratamento as e:
@@ -92,7 +92,7 @@ def tratar_cnpj(cnpj: str):
         )
 
     algorismos = list(cnpj_str)
-    if len(algorismos) > 14:
+    if not len(algorismos) == 14:
         raise ErroTratamento(
             'Não foi possivel tratar o cnpj. Digitou Corretamente?'
         )
