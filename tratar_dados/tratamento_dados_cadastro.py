@@ -95,25 +95,29 @@ def tratar_cnpj(cnpj: str):
             'CNPJ digitado incorretamente.'
         )
     sobra = cpf_iter(algorismos, 11)
+    sobra = 11 - sobra
 
-    if sobra < 2:
+    if sobra >= 10:
         if not int(algorismos[12]) == 0:
             raise ErroTratamento(
                 'CNPJ digitado incorretamente.'
             )
-    if not int(algorismos[12]) == 11 - sobra:
+        return
+    if not int(algorismos[12]) == sobra:
         raise ErroTratamento(
             'CNPJ digitado incorretamente.'
         )
 
-    sobra = cpf_iter(algorismos, 13)
+    sobra = cpf_iter(algorismos, 12)
+    sobra = 11 - sobra
 
-    if sobra < 2:
+    if sobra >= 10:
         if not int(algorismos[13]) == 0:
             raise ErroTratamento(
                 'CNPJ digitado incorretamente.'
             )
-    if not int(algorismos[13]) == 11 - sobra:
+        return
+    if not int(algorismos[13]) == sobra:
         raise ErroTratamento(
             'CNPJ digitado incorretamente.'
         )
@@ -122,12 +126,15 @@ def tratar_cnpj(cnpj: str):
 def cpf_iter(algorismos: list, start: int):
     soma = 0
     j = 2
-    for i in range(start, 0, -1):
+
+    for i in range(start, -1, -1):
         soma += int(algorismos[i]) * j
+
         j += 1
         if j == 10:
             j = 2
-    return soma % (start + 1)
+
+    return soma % 11
 
 
 def tratar_nivel(nivel: str):
