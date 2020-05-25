@@ -11,8 +11,8 @@ def serializar_dados(
 ) -> None:
     """lista de vendas, lista de distribuidores"""
 
-    config = ConfigParser('.config_data')
-
+    config = ConfigParser('.config.cfg')
+    
     vendas_save_file_path = config.get('serializacao', 'vendas_path')
     dist_save_file_path = config.get('serializacao', 'dist_path')
 
