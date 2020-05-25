@@ -17,14 +17,13 @@ def tratamento_registro_cadastro(*args):
         dados_dist.append(result)
         atualizar_dados(dados_vendas, dados_dist)
 
-    return 1
+    return 'Sucesso'
 
 
 def verificar_conteudo_dos_dados(
     dados_dist: list,
     *args: tuple,
 ):
-
     try:
         tratar_nome(args[0])
     except ErroTratamento as e:
@@ -88,24 +87,24 @@ def tratar_cnpj(cnpj: str):
         cnpj = int(cnpj)
     except Exception:
         raise ErroTratamento(
-            'Não foi possivel tratar o cnpj. Digitou Corretamente?'
+            'CNPJ digitado incorretamente.'
         )
 
     algorismos = list(cnpj_str)
-    if not len(algorismos) == 14:
+    if len(algorismos) > 14:
         raise ErroTratamento(
-            'Não foi possivel tratar o cnpj. Digitou Corretamente?'
+            'CNPJ digitado incorretamente.'
         )
     sobra = cpf_iter(algorismos, 11)
 
     if sobra < 2:
         if not int(algorismos[12]) == 0:
             raise ErroTratamento(
-                'Não foi possivel tratar o cnpj. Digitou Corretamente?'
+                'CNPJ digitado incorretamente.'
             )
     if not int(algorismos[12]) == 11 - sobra:
         raise ErroTratamento(
-            'Não foi possivel tratar o cnpj. Digitou Corretamente?'
+            'CNPJ digitado incorretamente.'
         )
 
     sobra = cpf_iter(algorismos, 13)
@@ -113,11 +112,11 @@ def tratar_cnpj(cnpj: str):
     if sobra < 2:
         if not int(algorismos[13]) == 0:
             raise ErroTratamento(
-                'Não foi possivel tratar o cnpj. Digitou Corretamente?'
+                'CNPJ digitado incorretamente.'
             )
     if not int(algorismos[13]) == 11 - sobra:
         raise ErroTratamento(
-            'Não foi possivel tratar o cnpj. Digitou Corretamente?'
+            'CNPJ digitado incorretamente.'
         )
 
 

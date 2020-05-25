@@ -6,10 +6,11 @@ global tupla
 def front():
     root = Tk()
     root.geometry("550x500")
-    root.title('Pleno Sono ')
+    root.title('Pleno Sono')
 
-    logo = ImageTk.PhotoImage(Image.open('plenosono.png'))
-    lg = Label(image=logo)
+    logo = ImageTk.PhotoImage(Image.open("logo.png"))
+    lg = Label(image = logo)
+
 
     def cad():
 
@@ -24,16 +25,22 @@ def front():
                 pecas.get().upper()
             )
             print(res)
+            resultado = Toplevel(cadastro)
+            resposta = Label(resultado, text = res, font = 25, padx = 25, pady = 10)
+            ok = Button(resultado, text = "Confirmar", command = resultado.destroy)
+
+            resposta.pack()
+            ok.pack()
+            
 
         cadastro = Toplevel(root)
         cadastro.geometry("500x500")
         cadastro.title("Cadastro")
-        cadastro.title("Alterar Cadastro")
 
         mens1 = Label(cadastro, text = "Nome Real", font = 25, padx = 50, pady = 25)
         mens2 = Label(cadastro, text = "CNPJ", font = 25, padx = 50, pady = 25)
         mens3 = Label(cadastro, text = "Contato", font = 25, padx = 50, pady = 25)
-        mens4 = Label(cadastro, text = "Nível de Formação", font = 50, padx = 25, pady = 25)
+        mens4 = Label(cadastro, text = "Niível de Formação", font = 50, padx = 25, pady = 25)
         mens5 = Label(cadastro, text = "Nome do Pai", font = 25, padx = 50, pady = 25)
         mens6 = Label(cadastro, text = "Peças vendidas", font = 25, padx = 50, pady = 25)
 
