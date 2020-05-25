@@ -15,10 +15,17 @@ def front():
     def cad():
 
         def confi():
-            tupla = [nome.get().upper(), cnpj.get().upper(), contato.get().upper(), nf.get().upper(), pai.get().upper(), pecas.get().upper()] 
-            res = tratamento_registro_cadastro(tupla)
+
+            res = tratamento_registro_cadastro(
+                nome.get().upper(),
+                cnpj.get().upper(),
+                contato.get().upper(),
+                nf.get().upper(),
+                pai.get().upper(),
+                pecas.get().upper()
+            )
             print(res)
-            
+
         cadastro = Toplevel(root)
         cadastro.geometry("500x500")
         cadastro.title("Cadastro")

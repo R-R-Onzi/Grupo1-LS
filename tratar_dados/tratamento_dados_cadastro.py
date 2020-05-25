@@ -4,19 +4,18 @@ from estrutura_dados.distrbuidor import Distribuidor
 from tratar_dados.erro_tratamento import ErroTratamento
 
 
-def tratamento_registro_cadastro(*args: tuple):
+def tratamento_registro_cadastro(*args):
     """nome, cnpj, contato, nivel, nome_pai, pecas_vendidas"""
 
     dados_vendas, dados_dist = puxar_dados()
 
-    result = verificar_conteudo_dos_dados(args)
-    print(result)
-    if type(result) == str:
-        return result
+    result = verificar_conteudo_dos_dados(dados_dist, *args)
+
+    if type(result) == ErroTratamento:
+        return result.get_msg()
     if type(result) == Distribuidor:
         dados_dist.append(result)
-
-    atualizar_dados(dados_vendas, dados_dist)
+        atualizar_dados(dados_vendas, dados_dist)
 
     return 'Sucesso'
 
@@ -25,30 +24,30 @@ def verificar_conteudo_dos_dados(
     dados_dist: list,
     *args: tuple,
 ):
-
+    print(args[0])
     try:
         tratar_nome(args[0])
-    except Exception as e:
+    except ErroTratamento as e:
         return e
 
     try:
         tratar_cnpj(args[1])
-    except Exception as e:
+    except ErroTratamento as e:
         return e
 
     try:
         tratar_nivel(args[3])
-    except Exception as e:
+    except ErroTratamento as e:
         return e
 
     try:
         tratar_nome_pai(args[4], dados_dist)
-    except Exception as e:
+    except ErroTratamento as e:
         return e
 
     try:
         tratar_float(args[5])
-    except Exception as e:
+    except ErroTratamento as e:
         return e
 
     return Distribuidor(args)

@@ -22,7 +22,7 @@ def puxar_dados() -> Tuple[List[Vendas], List[Distribuidor]]:
 
 def load_data_list(load_path: str) -> List:
 
-    if os.path.exists("dados"):
+    if os.path.exists(load_path):
         with open(load_path, 'rb') as load_file:
             try:
                 lista_objeto = pickle.load(load_file)
