@@ -1,5 +1,5 @@
-from tkinter import *
-from PIL import ImageTk , Image
+from tkinter import Label, Toplevel, Tk, Button, Entry
+from PIL import ImageTk, Image
 from tratar_dados.tratamento_dados_cadastro import tratamento_registro_cadastro
 global tupla
 
