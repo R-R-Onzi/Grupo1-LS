@@ -1,41 +1,28 @@
-from tkinter import Label, Toplevel, Tk, Button, Entry
-from PIL import ImageTk, Image
+from tkinter import *
+from PIL import ImageTk , Image
 from tratar_dados.tratamento_dados_cadastro import tratamento_registro_cadastro
 global tupla
 
 def front():
     root = Tk()
     root.geometry("550x500")
-    root.title('Pleno Sono')
+    root.title('Pleno Sono ')
 
-    logo = ImageTk.PhotoImage(Image.open("logo.png"))
-    lg = Label(image = logo)
+    #logo = ImageTk.PhotoImage(Image.open('cropped-plenosono_logo-1.png'))
+    #lg = Label(image = logo)
 
 
     def cad():
 
         def confi():
-
-            res = tratamento_registro_cadastro(
-                nome.get().upper(),
-                cnpj.get().upper(),
-                contato.get().upper(),
-                nf.get().upper(),
-                pai.get().upper(),
-                pecas.get().upper()
-            )
+            tupla = [nome.get().upper(), cnpj.get().upper(), contato.get().upper(), nf.get().upper(), pai.get().upper(), pecas.get().upper()] 
+            res = tratamento_registro_cadastro(tupla)
             print(res)
-            resultado = Toplevel(cadastro)
-            resposta = Label(resultado, text = res, font = 25, padx = 25, pady = 10)
-            ok = Button(resultado, text = "Confirmar", command = resultado.destroy)
-
-            resposta.pack()
-            ok.pack()
             
-
         cadastro = Toplevel(root)
         cadastro.geometry("500x500")
         cadastro.title("Cadastro")
+        cadastro.title("Alterar Cadastro")
 
         mens1 = Label(cadastro, text = "Nome Real", font = 25, padx = 50, pady = 25)
         mens2 = Label(cadastro, text = "CNPJ", font = 25, padx = 50, pady = 25)
@@ -92,7 +79,7 @@ def front():
     Cadas_Dist.grid(row = 0, column = 0, padx = 50, pady = 50)
     Alt_Dist.grid(row = 0, column = 1, padx = 50, pady = 50)
 
-    lg.grid(row = 1, column = 0, columnspan = 2)
+    #lg.grid(row = 1, column = 0, columnspan = 2)
 
     Ger_Rel.grid(row = 2, column = 0, padx = 50, pady = 50)
     Vis_Dist.grid(row = 2, column = 1, padx = 50, pady = 50)
